@@ -1,4 +1,4 @@
-import { BadRequestError } from '../infra/error/RequestError.js';
+import { BadRequestError } from '../infra/error/request-error.js';
 import taskStatus from '../enums/task-status.js';
 
 function isValidString(value, callbackMessage) {

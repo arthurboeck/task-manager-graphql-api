@@ -1,8 +1,8 @@
 import * as taskHistoryRepository from '../repository/task-history-repository.js';
 import { NotFoundError } from '../infra/error/request-error.js';
 
-export async function getTasksHistories() {
-    const tasks = await taskHistoryRepository.getTasksHistories();
+export async function getTaskHistories() {
+    const tasks = await taskHistoryRepository.getTaskHistories();
     if (!tasks || tasks.length === 0) {
         throw new NotFoundError('Nenhum historico encontrado!');
     }

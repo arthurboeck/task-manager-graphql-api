@@ -11,10 +11,10 @@ const db = knex({
     useNullAsDefault: true,
 });
 
-export async function getTasksHistories() {
+export async function getTaskHistories() {
     let historyList;
     try {
-        user = await db(tableTaskHistory);
+        historyList = await db(tableTaskHistory);
         console.info('Historicos encontrados na base: ', historyList);
     } catch (err) {
         handleDatabaseError('consultar', err);

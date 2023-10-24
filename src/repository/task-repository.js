@@ -14,7 +14,7 @@ const db = knex({
 export async function getTasks() {
     let taskList;
     try {
-        user = await db(tableTask);
+        taskList = await db(tableTask);
         console.info('Tarefas encontradas na base: ', taskList);
     } catch (err) {
         handleDatabaseError('consultar', err);
