@@ -1,0 +1,46 @@
+schema {
+  query: Query
+}
+
+scalar DateTime
+
+type Task {
+  id: ID
+  nome: String
+  descricao: String
+  responsavel: String
+  status: String
+  dataCriacao: DateTime
+  dataConclusao: DateTime
+}
+
+type TaskHistory {
+  id: ID
+  task: Task
+  descricao: String
+  usuario: String
+  data: DateTime
+}
+
+type User {
+  id: ID
+  nome: String
+  username: String
+  dataCriacao: DateTime
+}
+
+type Query {
+  tasks: [Task]
+  task(id: ID!): Task
+  taskHistories: [TaskHistory]
+  taskHistory(id: ID!): TaskHistory
+  users: [User]
+  user(usuario: String!): User
+}
+
+type Mutation {
+  createTask(nome: String!, descricao: String!, responsavel: String!): Task
+  updateTask(id: ID!, nome: String!, descricao: String!, status: String!, responsavel: String!): Task
+  deleteTask(id: ID!): Task
+  createUser(nome: String!, username: String!, password: String!): User
+}
