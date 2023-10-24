@@ -8,7 +8,9 @@ const server = new ApolloServer({
 });
 
 const { url } = await startStandaloneServer(server, {
-    listen: { port: 4000 },
+    listen: { port: 8080 },
 });
 
 console.log(`🚀  Server ready at: ${url}`);
+server.keepAliveTimeout = 120 * 1000;
+server.headersTimeout = 120 * 1000;
