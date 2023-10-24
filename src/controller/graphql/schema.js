@@ -29,16 +29,22 @@ const queryResolvers = {
 
 const mutationResolvers = {
     createTask(_root, args) {
-        return taskService.createTask(args.tarefa, args.usuario);
+        return taskService.createTask(args, args.responsavel);
+    },
+    completeTask(_root, args) {
+        return taskService.completeTask(args.id, args.usuario);
     },
     updateTask(_root, args) {
-        return taskService.updateTask(args.id, args.tarefa, args.usuario);
+        return taskService.updateTask(args.id, args, args.responsavel);
     },
     deleteTask(_root, args) {
         return taskService.deleteTask(args.id);
     },
     createUser(_root, args) {
-        return userService.createUser(args.usuario);
+        return userService.createUser(args);
+    },
+    updateUser(_root, args) {
+        return userService.updateUser(args.id, args);
     }
 };
 
