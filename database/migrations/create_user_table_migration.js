@@ -7,7 +7,7 @@ export function up(knex) {
         table.string('nome', 255).notNullable();
         table.string('usuario', 255).notNullable();
         table.string('senha', 255).notNullable();
-        table.string('dataCriacao', 255).notNullable();
+        table.datetime('dataCriacao', { precision: 6 }).defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     });
 };
 

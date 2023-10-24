@@ -9,8 +9,8 @@ export function up(knex) {
         table.string('responsavel', 255).unsigned().notNullable();
         table.foreign('responsavel').references('usuario').inTable('user');
         table.string('status', 255).notNullable();
-        table.timestamp('dataCriacao').defaultTo(knex.fn.now());
-        table.timestamp('dataConclusao');
+        table.datetime('dataCriacao', { precision: 6 }).defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+        table.datetime('dataConclusao', { precision: 6 });
     });
 };
 

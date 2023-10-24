@@ -9,7 +9,7 @@ export function up(knex) {
         table.string('descricao', 255).notNullable();
         table.string('usuario', 255).unsigned().notNullable();
         table.foreign('usuario').references('usuario').inTable('user');
-        table.timestamp('data').defaultTo(knex.fn.now());
+        table.datetime('data', { precision: 6 }).defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     });
 };
 

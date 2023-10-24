@@ -4,7 +4,12 @@
   "description": "API GraphQL para gerenciamento de tarefas",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "start:migrations": "npx knex migrate:latest && npx knex seed:run && node index.js",
+    "migrations:list": "npx knex migrate:list",
+    "migrations:run": "npx knex migrate:latest",
+    "seed:run": "npx knex seed:run",
+    "migrations-seed:run": "npx knex migrate:latest && npx knex seed:run"
   },
   "keywords": [],
   "author": "Arthur Guterres Boeck",
@@ -14,6 +19,7 @@
     "@apollo/server": "^4.9.4",
     "dotenv-safe": "^8.2.0",
     "graphql": "^16.8.1",
+    "graphql-iso-date": "^3.6.1",
     "knex": "^3.0.1",
     "sqlite3": "^5.1.6"
   }
