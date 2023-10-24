@@ -1,5 +1,6 @@
 import { ServerError } from '../infra/error/request-error.js';
 import knex from 'knex';
+import tagStatus from '../enum/task-status.js';
 
 const tableTask = 'task';
 
@@ -53,6 +54,21 @@ export function updateTask(taskId, task) {
         .update(task)
         .then(() => {
             console.info('Tarefa atualizada com sucesso na base');
+        })
+        .catch((err) => {
+            handleDatabaseError('atualizar', err);
+        });
+};
+
+export function completeTask(taskId) {
+    db(tableTask)
+        .where({ id: taskId })
+        .update({
+            status: tagStatus.CONCLUIDO,
+            dataConclusao: new Date().toISOString()
+        })
+        .then(() => {
+            console.info('Tarefa concluida com sucesso na base');
         })
         .catch((err) => {
             handleDatabaseError('atualizar', err);
