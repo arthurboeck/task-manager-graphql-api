@@ -14,12 +14,23 @@ const db = knex({
 export async function getUsers() {
     let userList;
     try {
-        user = await db(tableUser);
+        userList = await db(tableUser);
         console.info('Usuarios encontrados na base: ', userList);
     } catch (err) {
         handleDatabaseError('consultar', err);
     }
     return userList;
+};
+
+export async function getUserById(userId) {
+    let user;
+    try {
+        user = await db(tableUser).where({ id: userId });
+        console.info('Usuario encontrado na base: ', user);
+    } catch (err) {
+        handleDatabaseError('consultar', err);
+    }
+    return user[0];
 };
 
 export async function getUserByUserName(username) {
@@ -34,10 +45,12 @@ export async function getUserByUserName(username) {
 };
 
 export function insertUser(user) {
-    db(tableUser)
+    return db(tableUser)
         .insert(user)
-        .then(() => {
+        .returning('id')
+        .then((ids) => {
             console.info('Usuario inserido com sucesso na base');
+            return ids[0];
         })
         .catch((err) => {
             handleDatabaseError('inserir', err);
@@ -45,11 +58,13 @@ export function insertUser(user) {
 };
 
 export function updateUser(userId, user) {
-    db(tableUser)
+    return db(tableUser)
         .where({ id: userId })
         .update(user)
-        .then(() => {
+        .returning('id')
+        .then((ids) => {
             console.info('Usuario atualizado com sucesso na base');
+            return ids[0];
         })
         .catch((err) => {
             handleDatabaseError('atualizar', err);

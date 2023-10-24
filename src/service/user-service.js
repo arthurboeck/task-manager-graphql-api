@@ -17,11 +17,19 @@ export async function getUserByUserName(userName) {
     }
     return userDetail;
 };
+export async function getUserById(userId) {
+    const userDetail = await userRepository.getUserById(userId);
+    if (!userDetail) {
+        throw new NotFoundError('Usuario não encontrado!');
+    }
+    return userDetail;
+};
 
 export async function createUser(user) {
     try {
         validateUser(user);
-        userRepository.insertUser(user);
+        let newUser = await userRepository.insertUser(user);
+        return await getUserById(newUser.id);
     } catch (error) {
         throw error;
     }
@@ -30,9 +38,9 @@ export async function createUser(user) {
 export async function updateUser(userId, userUpdate) {
     try {
         await getUserById(userId);
-
         validateUser(userUpdate);
-        userRepository.updateUser(userId, userUpdate);
+        let user = await userRepository.updateUser(userId, userUpdate);
+        return await getUserById(user.id);
     } catch (error) {
         throw error;
     }
