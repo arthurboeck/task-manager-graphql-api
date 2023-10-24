@@ -1,0 +1,20 @@
+{
+  "name": "task-manager-graphql-api",
+  "version": "1.0.0",
+  "description": "API GraphQL para gerenciamento de tarefas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Arthur Guterres Boeck",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@apollo/server": "^4.9.4",
+    "dotenv-safe": "^8.2.0",
+    "graphql": "^16.8.1",
+    "knex": "^3.0.1",
+    "sqlite3": "^5.1.6"
+  }
+}
