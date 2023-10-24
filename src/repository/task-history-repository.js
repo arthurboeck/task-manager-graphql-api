@@ -67,7 +67,7 @@ export function insertTaskHistory(taskHistory) {
 };
 
 export function deleteTaskHistoryByTaskId(taskId) {
-    db(tableTask)
+    db(tableTaskHistory)
         .where({ idTask: taskId })
         .del()
         .then(() => {
