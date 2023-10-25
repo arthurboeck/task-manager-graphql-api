@@ -6,6 +6,8 @@ import { resolvers, typeDefs } from './src/controller/graphql/schema.js';
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    introspection: true,
+    status400ForVariableCoercionErrors: true,
     plugins: [ApolloServerPluginLandingPageProductionDefault(
         {
             embed: {
@@ -15,7 +17,7 @@ const server = new ApolloServer({
                     showHeadersAndEnvVars: true,
                 },
             },
-            document: typeDefs,
+            document: resolvers,
         }
     )]
 });
