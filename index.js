@@ -1,12 +1,23 @@
 import { ApolloServer } from '@apollo/server';
-import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { ApolloServerPluginLandingPageProductionDefault } from '@apollo/server/plugin/landingPage/default';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { resolvers, typeDefs } from './src/controller/graphql/schema.js';
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    plugins: [ApolloServerPluginLandingPageLocalDefault()]
+    plugins: [ApolloServerPluginLandingPageProductionDefault(
+        {
+            embed: {
+                displayOptions: {
+                    runTelemetry: true,
+                    docsPanelState: 'open',
+                    showHeadersAndEnvVars: true,
+                },
+            },
+            document: typeDefs,
+        }
+    )]
 });
 
 const port = process.env.PORT || 8080;
