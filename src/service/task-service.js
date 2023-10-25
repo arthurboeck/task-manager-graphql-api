@@ -45,8 +45,8 @@ export async function createTask(task, userLogged) {
 
 export async function updateTask(taskId, taskUpdate, userLogged) {
     try {
-        await taskRepository.getTaskById(taskId);
         validateTask(taskUpdate, true);
+        await taskRepository.getTaskById(taskId);
         await getUserByUserName(taskUpdate.responsavel.replace(/\s+/g, ' '));
 
         await taskRepository.updateTask(taskId, taskUpdate);

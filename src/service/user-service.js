@@ -37,8 +37,8 @@ export async function createUser(user) {
 
 export async function updateUser(userId, userUpdate) {
     try {
-        await getUserById(userId);
         validateUser(userUpdate);
+        await getUserById(userId);
         const updatedUser = await userRepository.updateUser(userId, userUpdate);
         return getUserById(updatedUser.id);
     } catch (error) {
