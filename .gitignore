@@ -149,3 +149,4 @@ yarn-error.log*
 .history/*
 
 database/db.sqlite
+eslint-report.html
