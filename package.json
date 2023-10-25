@@ -23,6 +23,8 @@
     "sqlite3": "^5.1.6"
   },
   "devDependencies": {
-    "eslint": "^8.52.0"
+    "@graphql-eslint/eslint-plugin": "^3.20.1",
+    "eslint": "^8.52.0",
+    "eslint-config-google": "^0.14.0"
   }
 }

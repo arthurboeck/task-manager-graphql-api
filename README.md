@@ -9,10 +9,11 @@ A `task-manager-graphql-api` é uma aplicação Node.js construída com GraphQL 
 - [Node](https://nodejs.org/en/docs/)
 - [Npm](https://docs.npmjs.com/)
 - [GraphQL](https://graphql.org/learn/)
+- [GraphQL Scalars](https://the-guild.dev/graphql/scalars/docs/quick-start)
 - [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
 - [Knex](https://knexjs.org/guide/)
 - [SQLite](https://github.com/TryGhost/node-sqlite3)
-- [GraphQL ISO Date](https://github.com/excitement-engineer/graphql-iso-date)
+- [ESLint](https://eslint.org/docs/latest/use/getting-started)
 
 ## Como executar a aplicação
 
@@ -294,4 +295,4 @@ query TaskHistory {
 
 Este compononente utiliza o [render](https://render.com/) para deploy. O deploy é realizado automaticamente a cada commit na branch master.
 
-A aplicação pode ser acessada em [https://task-manager-graphql-api.onrender.com](https://task-manager-graphql-api.onrender.com).
+A aplicação e seu explorer podem ser acessados em [https://task-manager-graphql-api.onrender.com](https://task-manager-graphql-api.onrender.com).
