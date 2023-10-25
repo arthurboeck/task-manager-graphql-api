@@ -1,9 +1,9 @@
 import { readFileSync } from 'fs';
-import { resolve, dirname } from 'path';
+import { DateTimeResolver } from 'graphql-scalars';
+import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import GraphQLDateTime from 'graphql-iso-date';
-import * as taskService from '../../service/task-service.js';
 import * as taskHistoryService from '../../service/task-history-service.js';
+import * as taskService from '../../service/task-service.js';
 import * as userService from '../../service/user-service.js';
 
 const queryResolvers = {
@@ -52,9 +52,10 @@ const filename = fileURLToPath(import.meta.url);
 const typeDefs = readFileSync(resolve(dirname(filename), 'schema.graphql'), { encoding: 'utf-8' });
 
 const resolvers = {
-  DateTime: GraphQLDateTime,
+  DateTime: DateTimeResolver,
   Query: queryResolvers,
   Mutation: mutationResolvers,
 };
 
-export { typeDefs, resolvers };
+export { resolvers, typeDefs };
+
