@@ -9,6 +9,7 @@ const server = new ApolloServer({
     introspection: true,
     status400ForVariableCoercionErrors: true,
     formatError: (error) => {
+        console.error(error);
         return {
             message: error.extensions.stacktrace[0],
         };
