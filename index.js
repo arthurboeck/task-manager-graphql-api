@@ -1,6 +1,6 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from '@apollo/server-plugin-landing-page-graphql-playground';
 import { resolvers, typeDefs } from './src/controller/graphql/schema.js';
 
 const server = new ApolloServer({
