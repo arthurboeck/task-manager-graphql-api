@@ -11,7 +11,7 @@ const server = new ApolloServer({
     formatError: (error) => {
         console.error(error);
         return {
-            message: error.extensions.stacktrace[0],
+            message: error.message,
         };
     },
     plugins: [ApolloServerPluginLandingPageProductionDefault(
