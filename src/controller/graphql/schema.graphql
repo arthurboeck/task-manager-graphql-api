@@ -1,7 +1,3 @@
-schema {
-  query: Query
-}
-
 scalar DateTime
 
 type Task {
@@ -45,5 +41,5 @@ type Mutation {
   completeTask(id: ID!, usuario: String!): Task
   deleteTask(id: ID!): Boolean
   createUser(nome: String!, usuario: String!, senha: String!): User
-  updateUser(id:ID!, nome: String!, usuario: String!, senha: String!): User
+  updateUser(id: ID!, nome: String!, usuario: String!, senha: String!): User
 }
