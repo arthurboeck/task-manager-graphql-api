@@ -1,4 +1,4 @@
-import { NotFoundError } from '../infra/error/request-error.js';
+import { NotFoundError } from '../infra/error/error-handler.js';
 import * as userRepository from '../repository/user-repository.js';
 import validateUser from './user-validator.js';
 

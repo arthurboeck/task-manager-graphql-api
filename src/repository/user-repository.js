@@ -1,5 +1,5 @@
 import knex from 'knex';
-import { ServerError } from '../infra/error/request-error.js';
+import { ServerError } from '../infra/error/error-handler.js';
 
 const tableUser = 'user';
 

@@ -1,4 +1,4 @@
-import { NotFoundError } from '../infra/error/request-error.js';
+import { NotFoundError } from '../infra/error/error-handler.js';
 import * as taskHistoryRepository from '../repository/task-history-repository.js';
 
 export async function getTaskHistories() {

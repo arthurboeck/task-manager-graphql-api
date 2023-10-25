@@ -1,4 +1,4 @@
-import { BadRequestError } from '../infra/error/request-error.js';
+import { BadRequestError } from '../infra/error/error-handler.js';
 
 function isValidString(value, fieldName, minLength = 1, maxLength = 255) {
     if (!value || typeof value !== 'string' || value.length < minLength || value.length > maxLength) {

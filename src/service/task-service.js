@@ -1,6 +1,6 @@
 import taskHistoryStatus from '../enum/task-history-status.js';
 import taskStatus from '../enum/task-status.js';
-import { NotFoundError } from '../infra/error/request-error.js';
+import { NotFoundError } from '../infra/error/error-handler.js';
 import * as taskRepository from '../repository/task-repository.js';
 import * as taskHistoryService from '../service/task-history-service.js';
 import { getUserByUserName } from '../service/user-service.js';

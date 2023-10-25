@@ -1,6 +1,6 @@
 import knex from 'knex';
 import taskStatus from '../enum/task-status.js';
-import { ServerError } from '../infra/error/request-error.js';
+import { ServerError } from '../infra/error/error-handler.js';
 
 const tableTask = 'task';
 
