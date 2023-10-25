@@ -8,7 +8,7 @@ export async function getUsers() {
         throw new NotFoundError('Nenhum usuário encontrado!');
     }
     return users;
-};
+}
 
 export async function getUserByUserName(userName) {
     const userDetail = await userRepository.getUserByUserName(userName);
@@ -16,41 +16,29 @@ export async function getUserByUserName(userName) {
         throw new NotFoundError('Usuário não encontrado!');
     }
     return userDetail;
-};
+}
 export async function getUserById(userId) {
     const userDetail = await userRepository.getUserById(userId);
     if (!userDetail) {
         throw new NotFoundError('Usuário não encontrado!');
     }
     return userDetail;
-};
+}
 
 export async function createUser(user) {
-    try {
-        validateUser(user);
-        const newUser = await userRepository.insertUser(user);
-        return getUserById(newUser.id);
-    } catch (error) {
-        throw error;
-    }
-};
+    validateUser(user);
+    const newUser = await userRepository.insertUser(user);
+    return getUserById(newUser.id);
+}
 
 export async function updateUser(userId, userUpdate) {
-    try {
-        validateUser(userUpdate);
-        await getUserById(userId);
-        const updatedUser = await userRepository.updateUser(userId, userUpdate);
-        return getUserById(updatedUser.id);
-    } catch (error) {
-        throw error;
-    }
-};
+    validateUser(userUpdate);
+    await getUserById(userId);
+    const updatedUser = await userRepository.updateUser(userId, userUpdate);
+    return getUserById(updatedUser.id);
+}
 
 export async function deleteUser(userId) {
-    try {
-        await getUserById(userId);
-        await userRepository.deleteUser(userId);
-    } catch (error) {
-        throw error;
-    }
-};
+    await getUserById(userId);
+    await userRepository.deleteUser(userId);
+}

@@ -6,7 +6,7 @@ const tableTaskHistory = 'task_history';
 const db = knex({
     client: 'sqlite3',
     connection: {
-        filename: './database/db.sqlite'
+        filename: './database/db.sqlite',
     },
     useNullAsDefault: true,
 });
@@ -20,7 +20,7 @@ export async function getTaskHistories() {
         handleDatabaseError('consultar', err);
     }
     return historyList;
-};
+}
 
 export async function getTaskHistoryByHistoryId(historyId) {
     let history;
@@ -31,7 +31,7 @@ export async function getTaskHistoryByHistoryId(historyId) {
         handleDatabaseError('consultar', err);
     }
     return history[0];
-};
+}
 
 export async function getTaskHistoryByTaskId(taskId) {
     let historyList;
@@ -42,7 +42,7 @@ export async function getTaskHistoryByTaskId(taskId) {
         handleDatabaseError('consultar', err);
     }
     return historyList;
-};
+}
 
 export function insertTaskHistory(taskHistory) {
     db(tableTaskHistory)
@@ -53,7 +53,7 @@ export function insertTaskHistory(taskHistory) {
         .catch((err) => {
             handleDatabaseError('inserir', err);
         });
-};
+}
 
 export function deleteTaskHistoryByTaskId(taskId) {
     db(tableTaskHistory)
@@ -65,9 +65,11 @@ export function deleteTaskHistoryByTaskId(taskId) {
         .catch((err) => {
             handleDatabaseError('deletar', err);
         });
-};
+}
 
 function handleDatabaseError(operation, error) {
     console.error(`Erro ao ${operation} histórico na base: `, error);
-    throw new ServerError(`Erro ao ${operation} histórico na base: `, error.message);
+    throw new ServerError(`Erro ao ${operation} histórico na base: `,
+        error.message);
 }
+

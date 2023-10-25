@@ -7,7 +7,7 @@ const tableTask = 'task';
 const db = knex({
     client: 'sqlite3',
     connection: {
-        filename: './database/db.sqlite'
+        filename: './database/db.sqlite',
     },
     useNullAsDefault: true,
 });
@@ -21,7 +21,7 @@ export async function getTasks() {
         handleDatabaseError('consultar', err);
     }
     return taskList;
-};
+}
 
 export async function getTaskById(taskId) {
     let task;
@@ -32,7 +32,7 @@ export async function getTaskById(taskId) {
         handleDatabaseError('consultar', err);
     }
     return task[0];
-};
+}
 
 export function insertTask(task) {
     return db(tableTask)
@@ -46,7 +46,7 @@ export function insertTask(task) {
         .catch((err) => {
             handleDatabaseError('inserir', err);
         });
-};
+}
 
 export function updateTask(taskId, task) {
     db(tableTask)
@@ -58,14 +58,14 @@ export function updateTask(taskId, task) {
         .catch((err) => {
             handleDatabaseError('atualizar', err);
         });
-};
+}
 
 export function completeTask(taskId) {
     db(tableTask)
         .where({ id: taskId })
         .update({
             status: taskStatus.CONCLUIDO,
-            dataConclusao: new Date().toISOString()
+            dataConclusao: new Date().toISOString(),
         })
         .then(() => {
             console.info('Tarefa concluida com sucesso na base');
@@ -73,7 +73,7 @@ export function completeTask(taskId) {
         .catch((err) => {
             handleDatabaseError('atualizar', err);
         });
-};
+}
 
 export function deleteTask(taskId) {
     db(tableTask)
@@ -85,9 +85,9 @@ export function deleteTask(taskId) {
         .catch((err) => {
             handleDatabaseError('deletar', err);
         });
-};
+}
 
 function handleDatabaseError(operation, error) {
     console.error(`Erro ao ${operation} tarefa na base: `, error);
     throw new ServerError(`Erro ao ${operation} tarefa na base: `, error.message);
-};
+}

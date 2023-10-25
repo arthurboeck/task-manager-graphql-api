@@ -6,7 +6,7 @@ const tableUser = 'user';
 const db = knex({
     client: 'sqlite3',
     connection: {
-        filename: './database/db.sqlite'
+        filename: './database/db.sqlite',
     },
     useNullAsDefault: true,
 });
@@ -20,7 +20,7 @@ export async function getUsers() {
         handleDatabaseError('consultar', err);
     }
     return userList;
-};
+}
 
 export async function getUserById(userId) {
     let user;
@@ -31,7 +31,7 @@ export async function getUserById(userId) {
         handleDatabaseError('consultar', err);
     }
     return user[0];
-};
+}
 
 export async function getUserByUserName(username) {
     let user;
@@ -42,7 +42,7 @@ export async function getUserByUserName(username) {
         handleDatabaseError('consultar', err);
     }
     return user[0];
-};
+}
 
 export function insertUser(user) {
     return db(tableUser)
@@ -55,7 +55,7 @@ export function insertUser(user) {
         .catch((err) => {
             handleDatabaseError('inserir', err);
         });
-};
+}
 
 export function updateUser(userId, user) {
     return db(tableUser)
@@ -69,7 +69,7 @@ export function updateUser(userId, user) {
         .catch((err) => {
             handleDatabaseError('atualizar', err);
         });
-};
+}
 
 export function deleteUser(userId) {
     db(tableUser)
@@ -81,9 +81,10 @@ export function deleteUser(userId) {
         .catch((err) => {
             handleDatabaseError('deletar', err);
         });
-};
+}
 
 function handleDatabaseError(operation, error) {
     console.error(`Erro ao ${operation} usuário na base: `, error);
-    throw new ServerError(`Erro ao ${operation} usuário na base: `, error.message);
-};
+    throw new ServerError(`Erro ao ${operation} usuário na base: `,
+        error.message);
+}

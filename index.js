@@ -23,8 +23,8 @@ const server = new ApolloServer({
                     showHeadersAndEnvVars: true,
                 },
             },
-        }
-    )]
+        },
+    )],
 });
 
 const port = process.env.PORT || 8080;
