@@ -8,6 +8,12 @@ const server = new ApolloServer({
     resolvers,
     introspection: true,
     status400ForVariableCoercionErrors: true,
+    formatError: (error) => {
+        console.error(error);
+        return {
+            message: error.extensions.stacktrace[0],
+        };
+    },
     plugins: [ApolloServerPluginLandingPageProductionDefault(
         {
             embed: {
