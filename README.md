@@ -294,4 +294,4 @@ query TaskHistory {
 
 Este compononente utiliza o [render](https://render.com/) para deploy. O deploy é realizado automaticamente a cada commit na branch master.
 
-A aplicação pode ser acessada em [https://produtos-api.onrender.com](https://produtos-api.onrender.com).
+A aplicação pode ser acessada em [https://task-manager-graphql-api.onrender.com](https://task-manager-graphql-api.onrender.com).
