@@ -7,8 +7,9 @@ const server = new ApolloServer({
     resolvers,
 });
 
+const port = process.env.PORT || 8080;
 const { url } = await startStandaloneServer(server, {
-    listen: { port: 8080 },
+    listen: { port: port },
 });
 
 console.log(`🚀  Server ready at: ${url}`);
