@@ -1,5 +1,5 @@
-import { ServerError } from '../infra/error/request-error.js';
 import knex from 'knex';
+import { ServerError } from '../infra/error/request-error.js';
 
 const tableTaskHistory = 'task_history';
 
@@ -15,7 +15,7 @@ export async function getTaskHistories() {
     let historyList;
     try {
         historyList = await db(tableTaskHistory);
-        console.info('Historicos encontrados na base: ', historyList);
+        console.info('Históricos encontrados na base: ', historyList);
     } catch (err) {
         handleDatabaseError('consultar', err);
     }
@@ -26,7 +26,7 @@ export async function getTaskHistoryByHistoryId(historyId) {
     let history;
     try {
         history = await db(tableTaskHistory).where({ id: historyId });
-        console.info('Historico encontrado na base: ', history);
+        console.info('Histórico encontrado na base: ', history);
     } catch (err) {
         handleDatabaseError('consultar', err);
     }
@@ -37,18 +37,7 @@ export async function getTaskHistoryByTaskId(taskId) {
     let historyList;
     try {
         historyList = await db(tableTaskHistory).where({ idTask: taskId });
-        console.info('Historico encontrado na base: ', historyList);
-    } catch (err) {
-        handleDatabaseError('consultar', err);
-    }
-    return historyList;
-};
-
-export async function getTaskHistoryByUserName(username) {
-    let historyList;
-    try {
-        historyList = await db(tableTaskHistory).where({ usuario: username });
-        console.info('Historico encontrado na base: ', historyList);
+        console.info('Histórico encontrado na base: ', historyList);
     } catch (err) {
         handleDatabaseError('consultar', err);
     }
@@ -79,6 +68,6 @@ export function deleteTaskHistoryByTaskId(taskId) {
 };
 
 function handleDatabaseError(operation, error) {
-    console.error(`Erro ao ${operation} tarefa na base: `, error);
-    throw new ServerError(`Erro ao ${operation} tarefa na base: `, error.message);
-};
+    console.error(`Erro ao ${operation} histórico na base: `, error);
+    throw new ServerError(`Erro ao ${operation} histórico na base: `, error.message);
+}

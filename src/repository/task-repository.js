@@ -1,6 +1,6 @@
-import { ServerError } from '../infra/error/request-error.js';
 import knex from 'knex';
-import tagStatus from '../enum/task-status.js';
+import taskStatus from '../enum/task-status.js';
+import { ServerError } from '../infra/error/request-error.js';
 
 const tableTask = 'task';
 
@@ -64,7 +64,7 @@ export function completeTask(taskId) {
     db(tableTask)
         .where({ id: taskId })
         .update({
-            status: tagStatus.CONCLUIDO,
+            status: taskStatus.CONCLUIDO,
             dataConclusao: new Date().toISOString()
         })
         .then(() => {

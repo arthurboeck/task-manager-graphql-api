@@ -1,5 +1,5 @@
-import { ServerError } from '../infra/error/request-error.js';
 import knex from 'knex';
+import { ServerError } from '../infra/error/request-error.js';
 
 const tableUser = 'user';
 
@@ -15,7 +15,7 @@ export async function getUsers() {
     let userList;
     try {
         userList = await db(tableUser);
-        console.info('Usuarios encontrados na base: ', userList);
+        console.info('Usuários encontrados na base: ', userList);
     } catch (err) {
         handleDatabaseError('consultar', err);
     }
@@ -26,7 +26,7 @@ export async function getUserById(userId) {
     let user;
     try {
         user = await db(tableUser).where({ id: userId });
-        console.info('Usuario encontrado na base: ', user);
+        console.info('Usuário encontrado na base: ', user);
     } catch (err) {
         handleDatabaseError('consultar', err);
     }
@@ -37,7 +37,7 @@ export async function getUserByUserName(username) {
     let user;
     try {
         user = await db(tableUser).where({ usuario: username });
-        console.info('Usuario encontrado na base: ', user);
+        console.info('Usuário encontrado na base: ', user);
     } catch (err) {
         handleDatabaseError('consultar', err);
     }
@@ -84,6 +84,6 @@ export function deleteUser(userId) {
 };
 
 function handleDatabaseError(operation, error) {
-    console.error(`Erro ao ${operation} usuario na base: `, error);
-    throw new ServerError(`Erro ao ${operation} usuario na base: `, error.message);
+    console.error(`Erro ao ${operation} usuário na base: `, error);
+    throw new ServerError(`Erro ao ${operation} usuário na base: `, error.message);
 };
