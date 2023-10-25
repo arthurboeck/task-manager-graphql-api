@@ -1,18 +1,18 @@
-import * as taskHistoryRepository from '../repository/task-history-repository.js';
 import { NotFoundError } from '../infra/error/request-error.js';
+import * as taskHistoryRepository from '../repository/task-history-repository.js';
 
 export async function getTaskHistories() {
-    const tasks = await taskHistoryRepository.getTaskHistories();
-    if (!tasks || tasks.length === 0) {
-        throw new NotFoundError('Nenhum historico encontrado!');
+    const histories = await taskHistoryRepository.getTaskHistories();
+    if (!histories || histories.length === 0) {
+        throw new NotFoundError('Nenhum histórico encontrado!');
     }
-    return tasks;
-};
+    return histories;
+}
 
 export async function getTaskHistoryByHistoryId(historyId) {
     const history = await taskHistoryRepository.getTaskHistoryByHistoryId(historyId);
     if (!history) {
-        throw new NotFoundError('Historico não encontrado!');
+        throw new NotFoundError('Histórico não encontrado!');
     }
     return history;
 };
@@ -20,15 +20,7 @@ export async function getTaskHistoryByHistoryId(historyId) {
 export async function getTaskHistoryByTaskId(taskId) {
     const history = await taskHistoryRepository.getTaskHistoryByTaskId(taskId);
     if (!history) {
-        throw new NotFoundError('Historico não encontrado!');
-    }
-    return history;
-};
-
-export async function getTaskHistoryByUserName(username) {
-    const history = await taskHistoryRepository.getTaskHistoryByUserName(username);
-    if (!history) {
-        throw new NotFoundError('Historico não encontrado!');
+        throw new NotFoundError('Histórico não encontrado!');
     }
     return history;
 };

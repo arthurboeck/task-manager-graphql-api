@@ -1,20 +1,15 @@
 import { BadRequestError } from '../infra/error/request-error.js';
 
-function isValidString(value, callbackMessage) {
-    if (!value || typeof value !== 'string' || value.length === 0 || value.length > 255) {
-        throw new BadRequestError(callbackMessage);
+function isValidString(value, fieldName, minLength = 1, maxLength = 255) {
+    if (!value || typeof value !== 'string' || value.length < minLength || value.length > maxLength) {
+        throw new BadRequestError(`Campo ${fieldName} deve ser uma string com tamanho entre ${minLength} e ${maxLength}!`);
     }
 };
 
-const tamanhoCampo = 'deve ser do tipo string com tamanho entre 1 e 255!';
-const nomeInvalido = `Campo nome é obrigatorio, ${tamanhoCampo}`;
-const usuarioInvalido = `Campo usuario é obrigatorio, ${tamanhoCampo}`;
-const senhaInvalida = `Campo senha é obrigatorio, ${tamanhoCampo}`;
-
 export default function validateUser(user) {
-    isValidString(user.nome, nomeInvalido);
-    isValidString(user.usuario, usuarioInvalido);
-    isValidString(user.senha, senhaInvalida);
+    isValidString(user.nome, 'nome');
+    isValidString(user.usuario, 'usuario');
+    isValidString(user.senha, 'senha');
 
-    console.info('Usuario informado com request.body válido!');
+    console.info('Usuário informado com request.body válido!');
 };

@@ -1,29 +1,23 @@
-import { BadRequestError } from '../infra/error/request-error.js';
 import taskStatus from '../enum/task-status.js';
+import { BadRequestError } from '../infra/error/request-error.js';
 
-function isValidString(value, callbackMessage) {
-    if (!value || typeof value !== 'string' || value.length === 0 || value.length > 255) {
-        throw new BadRequestError(callbackMessage);
+function isValidString(value, fieldName, minLength = 1, maxLength = 255) {
+    if (!value || typeof value !== 'string' || value.length < minLength || value.length > maxLength) {
+        throw new BadRequestError(`Campo ${fieldName} deve ser uma string com tamanho entre ${minLength} e ${maxLength}!`);
     }
 };
 
 function isValidTaskStatus(value) {
-    let statusInvalido = `Campo status é obrigatorio, devendo ser: 'PEDENTE', 'CONCLUIDO' ou 'CANCELADO'!`;
-
-    if (value != taskStatus.CANCELADO && value != taskStatus.CONCLUIDO && value != taskStatus.PENDENTE) {
-        throw new BadRequestError(statusInvalido);
+    const validStatusValues = [taskStatus.CANCELADO, taskStatus.CONCLUIDO, taskStatus.PENDENTE];
+    if (!validStatusValues.includes(value)) {
+        throw new BadRequestError('Campo status é obrigatório e deve ser um dos valores: "CANCELADO", "CONCLUÍDO" ou "PENDENTE".');
     }
 };
 
-const tamanhoCampo = 'deve ser do tipo string com tamanho entre 1 e 255!';
-const nomeInvalido = `Campo nome é obrigatorio, ${tamanhoCampo}`;
-const descricaoInvalido = `Campo endereco é obrigatorio, ${tamanhoCampo}`;
-const responsavelInvalido = `Campo nomeGerente é obrigatorio, ${tamanhoCampo}`;
-
 export default function validateTask(task, update = false) {
-    isValidString(task.nome, nomeInvalido);
-    isValidString(task.descricao, descricaoInvalido);
-    isValidString(task.responsavel, responsavelInvalido);
+    isValidString(task.nome, 'nome');
+    isValidString(task.descricao, 'descricao');
+    isValidString(task.responsavel, 'responsavel');
 
     if (update) {
         isValidTaskStatus(task.status);
