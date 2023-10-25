@@ -1,12 +1,12 @@
 import { ApolloServer } from '@apollo/server';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { ApolloServerPluginLandingPageGraphQLPlayground } from '@apollo/server-plugin-landing-page-graphql-playground';
 import { resolvers, typeDefs } from './src/controller/graphql/schema.js';
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()]
+    plugins: [ApolloServerPluginLandingPageLocalDefault()]
 });
 
 const port = process.env.PORT || 8080;
