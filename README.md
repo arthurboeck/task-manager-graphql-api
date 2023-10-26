@@ -1,6 +1,6 @@
 # Gerenciador de Tarefas GraphQL API
 
-Aplicação desenvolvida para a disciplina de Node.JS na Especialização em Arquitetura de Software Distribuído - PUCMG.
+Aplicação desenvolvida para a disciplina de APIs e WebServices na Especialização em Arquitetura de Software Distribuído - PUCMG.
 
 A `task-manager-graphql-api` é uma aplicação Node.js construída com GraphQL e ApolloServer para gerenciar informações sobre tarefas e usuários. Essa API permite criar, visualizar, atualizar e deletar tarefas.
 
