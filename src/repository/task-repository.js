@@ -75,6 +75,21 @@ export function completeTask(taskId) {
         });
 }
 
+export function cancelTask(taskId) {
+    db(tableTask)
+        .where({ id: taskId })
+        .update({
+            status: taskStatus.CANCELADA,
+            dataConclusao: null,
+        })
+        .then(() => {
+            console.info('Tarefa cancelada com sucesso na base');
+        })
+        .catch((err) => {
+            handleDatabaseError('atualizar', err);
+        });
+}
+
 export function deleteTask(taskId) {
     db(tableTask)
         .where({ id: taskId })

@@ -51,8 +51,15 @@ export async function updateTaskById(taskId, taskUpdate) {
 }
 
 export async function completeTask(taskId, username) {
-    taskRepository.completeTask(taskId);
+    await taskRepository.completeTask(taskId);
     insertTaskHistory(taskId, username, taskHistoryStatus.CONCLUIDA);
+
+    return await getTaskById(taskId);
+}
+
+export async function cancelTask(taskId, username) {
+    await taskRepository.cancelTask(taskId);
+    insertTaskHistory(taskId, username, taskHistoryStatus.CANCELADA);
 
     return await getTaskById(taskId);
 }
@@ -66,7 +73,15 @@ export async function deleteTask(taskId) {
 }
 
 async function setStatusHistoricoAlteracao(taskId, task) {
-    await insertTaskHistory(taskId, task.responsavel, getTaskHistoryStatus(task.status));
+    insertTaskHistory(taskId, task.responsavel, getTaskHistoryStatus(task.status));
+    switch (task.status) {
+        case taskStatus.CANCELADA:
+            await cancelTask(taskId, task.responsavel);
+            break;
+        case taskStatus.CONCLUIDA:
+            await completeTask(taskId, task.responsavel);
+            break;
+    }
 }
 
 function getTaskHistoryStatus(status) {

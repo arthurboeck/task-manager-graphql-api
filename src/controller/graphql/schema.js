@@ -31,6 +31,9 @@ const mutationResolvers = {
     createTask(_root, args) {
         return taskService.createTask(args, args.responsavel);
     },
+    cancelTask(_root, args) {
+        return taskService.cancelTask(args.id, args.usuario);
+    },
     completeTask(_root, args) {
         return taskService.completeTask(args.id, args.usuario);
     },
