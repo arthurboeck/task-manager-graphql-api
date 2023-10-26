@@ -161,7 +161,7 @@ mutation UpdateTask {
     id: 1
     nome: "Lavar roupa"
     descricao: "Lavar as roupas de cama"
-    status: "CANCELADO"
+    status: "CANCELADA"
     responsavel: "arthur_guterres"
   ) {
     id

@@ -1,7 +1,7 @@
 const taskStatus = {
     PENDENTE: 'PENDENTE',
-    CONCLUIDO: 'CONCLUIDO',
-    CANCELADO: 'CANCELADO',
+    CONCLUIDA: 'CONCLUIDA',
+    CANCELADA: 'CANCELADA',
 };
 
 export default taskStatus;

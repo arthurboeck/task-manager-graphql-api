@@ -64,7 +64,7 @@ export function completeTask(taskId) {
     db(tableTask)
         .where({ id: taskId })
         .update({
-            status: taskStatus.CONCLUIDO,
+            status: taskStatus.CONCLUIDA,
             dataConclusao: new Date().toISOString(),
         })
         .then(() => {
