@@ -71,18 +71,6 @@ export function updateUser(userId, user) {
         });
 }
 
-export function deleteUser(userId) {
-    db(tableUser)
-        .where({ id: userId })
-        .del()
-        .then(() => {
-            console.info('Usuario deletado com sucesso na base');
-        })
-        .catch((err) => {
-            handleDatabaseError('deletar', err);
-        });
-}
-
 function handleDatabaseError(operation, error) {
     console.error(`Erro ao ${operation} usuário na base: `, error);
     throw new ServerError(`Erro ao ${operation} usuário na base: `,

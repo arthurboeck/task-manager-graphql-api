@@ -37,8 +37,3 @@ export async function updateUser(userId, userUpdate) {
     const updatedUser = await userRepository.updateUser(userId, userUpdate);
     return getUserById(updatedUser.id);
 }
-
-export async function deleteUser(userId) {
-    await getUserById(userId);
-    await userRepository.deleteUser(userId);
-}
