@@ -7,7 +7,7 @@ import * as taskService from '../../service/task-service.js';
 import * as userService from '../../service/user-service.js';
 
 const queryResolvers = {
-    tasks(_root, args) {
+    tasks(_root) {
         return taskService.getTasks();
     },
     task(_root, args) {
@@ -16,10 +16,10 @@ const queryResolvers = {
     taskHistory(_root, args) {
         return taskHistoryService.getTaskHistoryByTaskId(args.idTask);
     },
-    taskHistories(_root, args) {
+    taskHistories(_root) {
         return taskHistoryService.getTaskHistories();
     },
-    users(_root, args) {
+    users(_root) {
         return userService.getUsers();
     },
     user(_root, args) {
