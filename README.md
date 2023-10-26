@@ -22,7 +22,7 @@ Caso voce esteja executando o projeto pela primeira vez, será necessário execu
 Passo 1: Install de dependencias:
 
 ```shell
-npm install --legacy-peer-deps
+npm install
 ```
 
 Passo 2: Start do projeto:
@@ -36,7 +36,7 @@ Caso voce já tenha executado as migrations e seeds do projeto, o mesmo pode ser
 Passo 1: Install de dependencias:
 
 ```shell
-npm install --legacy-peer-deps
+npm install
 ```
 
 Passo 2: Start do projeto:
