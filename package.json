@@ -4,7 +4,7 @@
   "description": "API GraphQL para gerenciamento de tarefas",
   "main": "index.js",
   "scripts": {
-		"lint": "npx eslint . --format html --output-file eslint-report.html",
+    "lint": "npx eslint . --format html --output-file eslint-report.html",
     "start": "node index.js",
     "start:migrations": "npx knex migrate:latest && npx knex seed:run && node index.js",
     "migrations:list": "npx knex migrate:list",
