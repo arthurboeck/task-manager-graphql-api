@@ -75,24 +75,24 @@ export async function deleteTask(taskId) {
 async function setStatusHistoricoAlteracao(taskId, task) {
     insertTaskHistory(taskId, task.responsavel, getTaskHistoryStatus(task.status));
     switch (task.status) {
-        case taskStatus.CANCELADA:
-            await cancelTask(taskId, task.responsavel);
-            break;
-        case taskStatus.CONCLUIDA:
-            await completeTask(taskId, task.responsavel);
-            break;
+    case taskStatus.CANCELADA:
+        await cancelTask(taskId, task.responsavel);
+        break;
+    case taskStatus.CONCLUIDA:
+        await completeTask(taskId, task.responsavel);
+        break;
     }
 }
 
 function getTaskHistoryStatus(status) {
     console.log(status);
     switch (status) {
-        case taskStatus.CANCELADA:
-            return taskHistoryStatus.ALTERADA_CANCELADA;
-        case taskStatus.CONCLUIDA:
-            return taskHistoryStatus.ALTERADA_CONCLUIDA;
-        default:
-            return taskHistoryStatus.ALTERADA;
+    case taskStatus.CANCELADA:
+        return taskHistoryStatus.ALTERADA_CANCELADA;
+    case taskStatus.CONCLUIDA:
+        return taskHistoryStatus.ALTERADA_CONCLUIDA;
+    default:
+        return taskHistoryStatus.ALTERADA;
     }
 }
 
