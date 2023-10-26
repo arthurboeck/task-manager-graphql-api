@@ -65,13 +65,19 @@ export async function deleteTask(taskId) {
     return true;
 }
 
-function setStatusHistoricoAlteracao(taskId, task) {
-    if (task.status === taskStatus.CANCELADA) {
-        insertTaskHistory(taskId, task.responsavel, taskHistoryStatus.ALTERADA_CANCELADA);
-    } else if (task.status === taskStatus.CONCLUIDA) {
-        insertTaskHistory(taskId, task.responsavel, taskHistoryStatus.ALTERADA_CONCLUIDA);
-    } else {
-        insertTaskHistory(taskId, task.responsavel, taskHistoryStatus.ALTERADA);
+async function setStatusHistoricoAlteracao(taskId, task) {
+    await insertTaskHistory(taskId, task.responsavel, getTaskHistoryStatus(task.status));
+}
+
+function getTaskHistoryStatus(status) {
+    console.log(status);
+    switch (status) {
+        case taskStatus.CANCELADA:
+            return taskHistoryStatus.ALTERADA_CANCELADA;
+        case taskStatus.CONCLUIDA:
+            return taskHistoryStatus.ALTERADA_CONCLUIDA;
+        default:
+            return taskHistoryStatus.ALTERADA;
     }
 }
 
