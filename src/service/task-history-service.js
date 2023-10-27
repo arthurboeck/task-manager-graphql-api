@@ -33,9 +33,9 @@ export async function createTaskHistory(idTask, usuario, descricao) {
         usuario: usuario,
         descricao: descricao,
     };
-    await taskHistoryRepository.insertTaskHistory(history);
+    taskHistoryRepository.insertTaskHistory(history);
 }
 
 export async function deleteTaskHistoryByTaskId(taskId) {
-    await taskHistoryRepository.deleteTaskHistoryByTaskId(taskId);
+    taskHistoryRepository.deleteTaskHistoryByTaskId(taskId);
 }

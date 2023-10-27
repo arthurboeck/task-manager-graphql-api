@@ -29,34 +29,37 @@ export async function getTaskById(taskId) {
     return task;
 }
 
-import { insertTask } from '../repository/task-repository.js';
-
 export async function createTask(task, userLogged) {
     validateTask(task);
     await getUserByUserName(task.responsavel.replace(/\s+/g, ' '));
 
-    const newTask = await insertTask({ ...task, status: taskStatus.PENDENTE });
-    await taskHistoryService.createTaskHistory(newTask.id, userLogged, taskHistoryStatus.CRIADA);
+    const newTask = await taskRepository.insertTask({ ...task, status: taskStatus.PENDENTE });
+    insertTaskHistory(newTask.id, userLogged, taskHistoryStatus.CRIADA);
 
-    return getTaskById(newTask.id);
+    return await getTaskById(newTask.id);
 }
 
-import { updateTask } from '../repository/task-repository.js';
-
-export async function updateTaskById(taskId, taskUpdate, userLogged) {
+export async function updateTaskById(taskId, taskUpdate) {
     validateTask(taskUpdate, true);
     await taskRepository.getTaskById(taskId);
     await getUserByUserName(taskUpdate.responsavel.replace(/\s+/g, ' '));
 
-    await updateTask(taskId, taskUpdate);
-    taskHistoryService.createTaskHistory(taskId, userLogged, taskHistoryStatus.ALTERADA);
+    taskRepository.updateTask(taskId, taskUpdate);
+    setStatusHistoricoAlteracao(taskId, taskUpdate);
 
     return await getTaskById(taskId);
 }
 
-export async function completeTask(taskId, userLogged) {
+export async function completeTask(taskId, username) {
     await taskRepository.completeTask(taskId);
-    await taskHistoryService.createTaskHistory(taskId, userLogged, taskHistoryStatus.CONCLUIDA);
+    insertTaskHistory(taskId, username, taskHistoryStatus.CONCLUIDA);
+
+    return await getTaskById(taskId);
+}
+
+export async function cancelTask(taskId, username) {
+    await taskRepository.cancelTask(taskId);
+    insertTaskHistory(taskId, username, taskHistoryStatus.CANCELADA);
 
     return await getTaskById(taskId);
 }
@@ -64,7 +67,35 @@ export async function completeTask(taskId, userLogged) {
 export async function deleteTask(taskId) {
     await taskRepository.getTaskById(taskId);
     await taskHistoryService.deleteTaskHistoryByTaskId(taskId);
-    await taskRepository.deleteTask(taskId);
+    taskRepository.deleteTask(taskId);
 
     return true;
+}
+
+async function setStatusHistoricoAlteracao(taskId, task) {
+    insertTaskHistory(taskId, task.responsavel, getTaskHistoryStatus(task.status));
+    switch (task.status) {
+    case taskStatus.CANCELADA:
+        await cancelTask(taskId, task.responsavel);
+        break;
+    case taskStatus.CONCLUIDA:
+        await completeTask(taskId, task.responsavel);
+        break;
+    }
+}
+
+function getTaskHistoryStatus(status) {
+    console.log(status);
+    switch (status) {
+    case taskStatus.CANCELADA:
+        return taskHistoryStatus.ALTERADA_CANCELADA;
+    case taskStatus.CONCLUIDA:
+        return taskHistoryStatus.ALTERADA_CONCLUIDA;
+    default:
+        return taskHistoryStatus.ALTERADA;
+    }
+}
+
+async function insertTaskHistory(taskId, username, historyStatus) {
+    await taskHistoryService.createTaskHistory(taskId, username, historyStatus);
 }

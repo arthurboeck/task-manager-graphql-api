@@ -38,6 +38,7 @@ type Query {
 type Mutation {
   createTask(nome: String!, descricao: String!, responsavel: String!): Task
   updateTask(id: ID!, nome: String!, descricao: String!, status: String!, responsavel: String!): Task
+  cancelTask(id: ID!, usuario: String!): Task
   completeTask(id: ID!, usuario: String!): Task
   deleteTask(id: ID!): Boolean
   createUser(nome: String!, usuario: String!, senha: String!): User

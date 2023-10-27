@@ -2,7 +2,9 @@
 
 Aplicação desenvolvida para a disciplina de APIs e WebServices na Especialização em Arquitetura de Software Distribuído - PUCMG.
 
-A `task-manager-graphql-api` é uma aplicação Node.js construída com GraphQL e ApolloServer para gerenciar informações sobre tarefas e usuários. Essa API permite criar, visualizar, atualizar e deletar tarefas.
+A `task-manager-graphql-api` é uma aplicação Node.js construída com GraphQL e ApolloServer para gerenciar informações sobre tarefas e usuários. 
+
+Essa API permite criar, visualizar, atualizar, concluir, cancelar e deletar tarefas, gerando um histórico de movimentação da mesma. Assim como o cadastro e atualização de usuários para vinculo as tarefas, e suas ações.
 
 ## Dependencias
 
@@ -124,7 +126,7 @@ query User {
 
 ### Tarefas
 
-Possibilita o cadastro, atualização e listagem de tarefas e o historico de alteraçao das respectivas tarefas.
+Possibilita o cadastro, atualização, conclusão, cancelamento, e listagem de tarefas e o historico de alteraçao das respectivas tarefas.
 
 #### Cadastrar tarefa
 
@@ -161,9 +163,32 @@ mutation UpdateTask {
     id: 1
     nome: "Lavar roupa"
     descricao: "Lavar as roupas de cama"
-    status: "CANCELADO"
+    status: "CANCELADA"
     responsavel: "arthur_guterres"
   ) {
+    id
+    nome
+    descricao
+    responsavel
+    status
+    dataCriacao
+    dataConclusao
+    historico {
+      id
+      idTask
+      descricao
+      usuario
+      data
+    }
+  }
+}
+```
+
+#### Cancelar tarefa
+
+```graphql
+mutation CancelTask {
+  cancelTask(id: 1, usuario: "arthur_guterres") {
     id
     nome
     descricao

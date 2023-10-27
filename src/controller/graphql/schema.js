@@ -31,11 +31,14 @@ const mutationResolvers = {
     createTask(_root, args) {
         return taskService.createTask(args, args.responsavel);
     },
+    cancelTask(_root, args) {
+        return taskService.cancelTask(args.id, args.usuario);
+    },
     completeTask(_root, args) {
         return taskService.completeTask(args.id, args.usuario);
     },
     updateTask(_root, args) {
-        return taskService.updateTask(args.id, args, args.responsavel);
+        return taskService.updateTaskById(args.id, args, args.responsavel);
     },
     deleteTask(_root, args) {
         return taskService.deleteTask(args.id);

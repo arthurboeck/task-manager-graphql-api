@@ -64,11 +64,26 @@ export function completeTask(taskId) {
     db(tableTask)
         .where({ id: taskId })
         .update({
-            status: taskStatus.CONCLUIDO,
+            status: taskStatus.CONCLUIDA,
             dataConclusao: new Date().toISOString(),
         })
         .then(() => {
             console.info('Tarefa concluida com sucesso na base');
+        })
+        .catch((err) => {
+            handleDatabaseError('atualizar', err);
+        });
+}
+
+export function cancelTask(taskId) {
+    db(tableTask)
+        .where({ id: taskId })
+        .update({
+            status: taskStatus.CANCELADA,
+            dataConclusao: null,
+        })
+        .then(() => {
+            console.info('Tarefa cancelada com sucesso na base');
         })
         .catch((err) => {
             handleDatabaseError('atualizar', err);

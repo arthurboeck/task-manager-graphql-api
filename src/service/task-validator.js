@@ -12,12 +12,12 @@ function isValidString(value, fieldName, minLength = 1, maxLength = 255) {
 
 function isValidTaskStatus(value) {
     const validStatusValues = [
-        taskStatus.CANCELADO,
-        taskStatus.CONCLUIDO,
+        taskStatus.CANCELADA,
+        taskStatus.CONCLUIDA,
         taskStatus.PENDENTE,
     ];
     if (!validStatusValues.includes(value)) {
-        throw new BadRequestError('Campo status é obrigatório e deve ser um dos valores: "CANCELADO", "CONCLUÍDO" ou "PENDENTE".');
+        throw new BadRequestError('Campo status é obrigatório e deve ser um dos valores: "CANCELADA", "CONCLUÍDA" ou "PENDENTE".');
     }
 }
 
